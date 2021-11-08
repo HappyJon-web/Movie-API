@@ -75,6 +75,6 @@ app.get('/deletethemovie', (req, res) => {
     });
 });
 
-app.listen(port, ()=>{
-    console.log("Server is listening on port ${port}");
-});
+app.listen(process.env.PORT || 5500, ()=>{
+  console.log("Server is listening on port 5500");
+})
