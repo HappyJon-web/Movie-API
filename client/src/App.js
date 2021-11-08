@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Row, Col, Alert, Table, Container } from 'reactstrap';
 
-
-import {AxiosInstance} from 'axios';
+import axios from 'axios';
 
 class App extends Component{
   constructor() {
@@ -20,8 +19,8 @@ class App extends Component{
     this.onDismiss = this.onDismiss.bind(this);
   }
   getAllMovies = () => {
-    axiosInstance
-      .get('/getallthemovies')
+    axios
+      .get('http://localhost:5500/getallthemovies')
       .then(result => {
         this.setState({ movies: result.data });
         console.log(this.state.movies);
@@ -45,11 +44,11 @@ class App extends Component{
     this.setState({ alertVisible: false });
     //console.log(this.state.title);
 
-    const query = `/getthemovie?id=${this.state.movieid}`;
+    const query = `http://localhost:5500/getthemovie?id=${this.state.movieid}`;
 
     console.log(query);
 
-    axiosInstance
+    axios
       .get(query)
       .then(result => {
         console.log(result.data);
@@ -76,8 +75,8 @@ class App extends Component{
     this.setState({
       movies: this.state.movies.filter(movie => movie.title !== title)
     });
-    const query = `/deletethemovie?original_title=${title}`;
-    axiosInstance
+    const query = `http://localhost:5500/deletethemovie?original_title=${title}`;
+    axios
       .get(query)
       .then(result => {
         this.getAllMovies();
@@ -137,7 +136,7 @@ class App extends Component{
                   <th>Delete</th>
                   <th>Title</th>
                   <th>Date</th>
-                  <th>Overview</th>
+                  <th>Description</th>
                   <th>Poster</th>
                 </tr>
               </thead>
